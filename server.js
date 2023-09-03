@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 require("dotenv").config();
+const { getKeySecret } = require('./controllers/secret');
 const { purchase } = require('./controllers/purchase');
 const {getSponsor,postSponsor} = require('./controllers/sponsor');
 
@@ -24,6 +25,7 @@ app.listen(PORT, () => {
 
 app.post('/purchase', purchase);
 
-app.get('/sponsor',getSponsor );
+app.get('/sponsor', getSponsor);
+app.get('/getKeySecret', getKeySecret);
 
 app.post('/sponsor', postSponsor);
