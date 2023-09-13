@@ -1,6 +1,5 @@
 const purchase = require("../schemas/purchase");
-
-exports.purchase = async (req, res) => {
+exports.postTshirt= async (req, res) => {
   
     const newPurchase = new purchase({
         orderID: req.body.orderID,
@@ -9,8 +8,20 @@ exports.purchase = async (req, res) => {
         mobileNumber: req.body.mobileNumber,
         branch: req.body.branch,
         tshirtSize: req.body.tshirtSize,
-        transactionID: req.body.transactionID
+        transactionID: req.body.transactionID,  
+        hostel: req.body.hostel,
+        roomNumber:req.body.roomNumber
     });
-    newPurchase.save();
-    res.status(200).json(newPurchase);
+
+    newPurchase.imageURL = req.files(f => ({ url: f.path, filename: f.filename }));
+    const data = await newPurchase.save();
+    console.log(data); // checking 
+    
+    res.status(200).json(data);
 };
+
+exports.renderTshirt =  (req,res )=>{
+    //wait;
+    //render tshirt form 
+
+}

@@ -1,10 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const multer = require('multer');
 require("dotenv").config();
 const { getKeySecret } = require('./controllers/secret');
-const { purchase } = require('./controllers/purchase');
-const {getSponsor,postSponsor} = require('./controllers/sponsor');
+const { renderTshirt,postTshirt } = require('./controllers/purchase');
+const { getSponsor, postSponsor } = require('./controllers/sponsor');
+const { storage } = require('./cloudinary/index');
+const upload = multer({ storage });
 
 const app = express();
 
@@ -23,7 +26,8 @@ app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}...`);
 });
 
-app.post('/purchase', purchase);
+app.post('/purchase', upload.single('image'),postTshirt);
+app.get('/purchase', renderTshirt);
 
 app.get('/sponsor', getSponsor);
 app.get('/getKeySecret', getKeySecret);
