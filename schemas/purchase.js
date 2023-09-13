@@ -6,6 +6,8 @@ const purchaseTshirtSchema = mongoose.Schema({
     mobileNumber:Number,
     branch:String,
     tshirtSize:String,
-    transactionID:String
+    transactionID:String,
+    hostel:String,
+    roomNumber:String
 });
 module.exports = mongoose.model("purchase", purchaseTshirtSchema);
