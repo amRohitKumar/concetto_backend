@@ -1,23 +1,20 @@
-const purchase = require("../schemas/purchase");
-exports.postTshirt= async (req, res) => {
-  
-    const newPurchase = new purchase({
-        orderID: req.body.orderID,
-        name: req.body.name,
-        admissionNumber: req.body.admissionNumber,
-        mobileNumber: req.body.mobileNumber,
-        branch: req.body.branch,
-        tshirtSize: req.body.tshirtSize,
-        transactionID: req.body.transactionID,  
-        hostel: req.body.hostel,
-        roomNumber:req.body.roomNumber
-    });
+const Purchase = require("../schemas/purchase");
 
-    newPurchase.imageURL = req.files(f => ({ url: f.path, filename: f.filename }));
-    const data = await newPurchase.save();
-    console.log(data); // checking 
-    
-    res.status(200).json(data);
+exports.postTshirt= async (req, res) => {
+    console.log(req.file);
+
+        const { orderID, name, admissionNumber, mobileNumber, branch, tshirtSize ,transactionID ,hostel ,roomNumber } = req.body;
+        
+
+        const { path, filename} =req.file;
+        const purchase = new Purchase({ orderID ,name ,admissionNumber ,mobileNumber ,branch ,transactionID ,tshirtSize ,hostel ,roomNumber  });
+        purchase.imageURL= {
+            url : path ,
+            filename: filename
+        }
+        const data = await purchase.save();
+        console.log(data);
+        res.send(data);
 };
 
 exports.renderTshirt =  (req,res )=>{

@@ -3,41 +3,41 @@ const purchaseTshirtSchema = mongoose.Schema({
   
     orderID :{
         type :String,
-        required :true,
-        unique :true
+        // required :true,
+        // unique :true
     },
     name :{
         type:String ,
-        required :true
+        // required :true
     },
     admissionNumber:{
         type: String,
-        required :true ,
+        // required :true ,
 
     },
     mobileNumber :{
         type : String ,
-        required :true 
+        // required :true 
     },
     branch :{
         type: String ,
-        required :true 
+        // required :true 
     },
     tshirtSize :{
         type : String ,
-        required :true 
+        // required :true 
     },
     transactionID :{
         type :String,
-        required: true 
+        // required: true 
     },
     hostel: {
         type: String,
-        required:true
+        // required:true
     },
     roomNumber: {
         type: String,
-        required:true
+        // required:true
     },
     imageURL: {
         _id: false,
@@ -46,4 +46,4 @@ const purchaseTshirtSchema = mongoose.Schema({
     }   
 
 });
-module.exports = mongoose.model("purchase", purchaseTshirtSchema);
+module.exports = mongoose.model("Purchase", purchaseTshirtSchema);

@@ -1,21 +1,19 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const multer = require('multer');
 require("dotenv").config();
-const { getKeySecret } = require('./controllers/secret');
-const { renderTshirt,postTshirt } = require('./controllers/purchase');
-const { getSponsor, postSponsor } = require('./controllers/sponsor');
-const { storage } = require('./cloudinary/index');
-const upload = multer({ storage });
-
+const sponserRoute = require('./routes/sponserRoute');
+const purchaseRoute = require('./routes/purchaseRoute');
+const keySecretRoute = require('./routes/keySecretRoute');
 const app = express();
 
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/api', sponserRoute);
+app.use('/api', purchaseRoute);
+app.use('/api', keySecretRoute);
 
 mongoose
-  .connect(process.env.DATABASE_URL, {
+  // .connect("mongodb://localhost:27017/Concetto", {
+  .connect("mongodb://127.0.0.1:27017/Concetto23", {
     useNewUrlParser: true,
   })
   .then(() => console.log("database connected successfully"))
@@ -26,10 +24,4 @@ app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}...`);
 });
 
-app.post('/purchase', upload.single('image'),postTshirt);
-app.get('/purchase', renderTshirt);
 
-app.get('/sponsor', getSponsor);
-app.get('/getKeySecret', getKeySecret);
-
-app.post('/sponsor', postSponsor);
