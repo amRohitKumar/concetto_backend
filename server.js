@@ -13,7 +13,7 @@ app.use('/api', keySecretRoute);
 
 mongoose
   // .connect("mongodb://localhost:27017/Concetto", {
-  .connect("mongodb://127.0.0.1:27017/Concetto23", {
+  .connect("mongodb+srv://narendra-maurya:test1234@cluster0.2p53s5l.mongodb.net/concetto2023",{ useNewUrlParser: true }", {
     useNewUrlParser: true,
   })
   .then(() => console.log("database connected successfully"))
