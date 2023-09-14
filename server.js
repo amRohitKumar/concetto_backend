@@ -13,9 +13,7 @@ app.use('/api', keySecretRoute);
 
 mongoose
   // .connect("mongodb://localhost:27017/Concetto", {
-  .connect("mongodb+srv://narendra-maurya:test1234@cluster0.2p53s5l.mongodb.net/concetto2023",{ useNewUrlParser: true }", {
-    useNewUrlParser: true,
-  })
+  .connect("mongodb+srv://narendra-maurya:test1234@cluster0.2p53s5l.mongodb.net/concetto2023",{ useNewUrlParser: true })
   .then(() => console.log("database connected successfully"))
   .catch((err) => console.log("error connecting to mongodb" + err));
 const PORT = process.env.PORT || 8000;
