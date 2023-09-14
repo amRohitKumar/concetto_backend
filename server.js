@@ -1,12 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 require("dotenv").config();
 const sponserRoute = require('./routes/sponserRoute');
 const purchaseRoute = require('./routes/purchaseRoute');
 const keySecretRoute = require('./routes/keySecretRoute');
 const app = express();
-
+app.use(cors());
 app.use('/api', sponserRoute);
 app.use('/api', purchaseRoute);
 app.use('/api', keySecretRoute);
